@@ -17,6 +17,9 @@ namespace BIZ
         private ObservableCollection<Animal> animals;
         private ObservableCollection<Gender> genders;
         private ObservableCollection<Species> species;
+        private Animal selectedAnimal;
+        private Species selectedSpecies;
+        private Gender selectedGender;
 
         public ClassBIZ()
         {
@@ -39,6 +42,45 @@ namespace BIZ
         {
             get { return species; }
             set { species = value; }
+        }
+        
+        public Animal SelectedAnimal
+        {
+            get { return selectedAnimal; }
+            set
+            {
+                if (value != selectedAnimal)
+                {
+                    selectedAnimal = value;
+                    Notify("SelectedAnimal");
+                }
+            }
+        }
+
+        public Species SelectedSpecies
+        {
+            get { return selectedSpecies; }
+            set
+            {
+                if (value != selectedSpecies)
+                {
+                    selectedSpecies = value;
+                    Notify("SelectedSpecies");
+                }
+            }
+        }
+
+        public Gender SelectedGender
+        {
+            get { return selectedGender; }
+            set
+            {
+                if (value != selectedGender)
+                {
+                    selectedGender = value;
+                    Notify("SelectedGender");
+                }
+            }
         }
     }
 }

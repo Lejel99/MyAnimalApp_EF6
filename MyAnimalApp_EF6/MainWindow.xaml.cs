@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using BIZ;
 
 namespace MyAnimalApp_EF6
 {
@@ -20,9 +21,11 @@ namespace MyAnimalApp_EF6
     /// </summary>
     public partial class MainWindow : Window
     {
+        ClassBIZ CB = new ClassBIZ();
         public MainWindow()
         {
             InitializeComponent();
+            gridMain.DataContext = CB;
         }
     }
 }

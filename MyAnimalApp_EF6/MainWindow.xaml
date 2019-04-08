@@ -48,6 +48,7 @@
                    Margin="40,0,0,0" />
 
             <TextBox x:Name="textBoxAnimalName"
+                     Text="{Binding SelectedAnimal.AnimalName}"
                      Grid.Column="1"
                      Grid.Row="0"
                      Grid.ColumnSpan="2"
@@ -55,6 +56,10 @@
                      Margin="0,0,10,0"
                      VerticalContentAlignment="Center"/>
             <ComboBox x:Name="comboBoxAnimalSpecies"
+                      ItemsSource="{Binding Species}"
+                      SelectedValue="{Binding SelectedAnimal.Species}"
+                      DisplayMemberPath="SpeciesName"
+                      SelectedValuePath="SpeciesName"
                       Grid.Column="1"
                       Grid.Row="1"
                       Grid.ColumnSpan="2"
@@ -62,11 +67,16 @@
                       Margin="0,0,80,0"
                       VerticalContentAlignment="Center"/>
             <ComboBox x:Name="comboBoxAnimalGenders"
+                      ItemsSource="{Binding Genders}"
+                      SelectedValue="{Binding SelectedAnimal.Gender}"
+                      DisplayMemberPath="GenderName"
+                      SelectedValuePath="GenderName"
                       Grid.Column="1"
                       Grid.Row="2"
                       Height="26"
                       VerticalContentAlignment="Center" />
             <TextBox x:Name="textBoxAnimalAge"
+                     Text="{Binding SelectedAnimal.AnimalAge}"
                      Grid.Column="1"
                      Grid.Row="3"
                      Grid.ColumnSpan="2"
@@ -91,7 +101,10 @@
                     Margin="30,30,30,30" />
         </Grid>
         <ListView x:Name="listViewAnimals"
-                  Margin="10">
+                  Margin="10"
+                  ItemsSource="{Binding Animals}"
+                  DisplayMemberPath="AnimalName"
+                  SelectedValue="{Binding SelectedAnimal}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Navn"
