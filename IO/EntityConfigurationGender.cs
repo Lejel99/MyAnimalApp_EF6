@@ -17,7 +17,8 @@ namespace IO
 
             this.HasKey<int>(g => g.GenderId);
             this.Property(g => g.GenderName)
-                .HasMaxLength(30);
+                .HasMaxLength(30)
+                .IsRequired();
         }
     }
 }

@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AnimalContext.cs" />
+    <Compile Include="EntityConfigurationAnimal.cs" />
     <Compile Include="EntityConfigurationGender.cs" />
     <Compile Include="EntityConfigurationSpecies.cs" />
     <Compile Include="InitializerGender.cs" />

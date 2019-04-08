@@ -10,7 +10,7 @@ namespace IO
 {
     public class AnimalContext : DbContext
     {
-        public AnimalContext() : base("Data Source=cv-bb-5851;Initial Catalog=Animals;Integrated Security=True")
+        public AnimalContext() : base("EntityAnimalDB")
         {
             Database.SetInitializer<AnimalContext>(new CreateDatabaseIfNotExists<AnimalContext>());
             Database.SetInitializer(new InitializerGender());
@@ -25,6 +25,7 @@ namespace IO
         {
             modelBuilder.Configurations.Add(new EntityConfigurationGender());
             modelBuilder.Configurations.Add(new EntityConfigurationSpecies());
+            modelBuilder.Configurations.Add(new EntityConfigurationAnimal());
         }
     }
 }

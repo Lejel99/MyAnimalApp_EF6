@@ -16,7 +16,8 @@ namespace IO
 
             this.HasKey<int>(g => g.SpeciesId);
             this.Property(g => g.SpeciesName)
-                .HasMaxLength(30);
+                .HasMaxLength(30)
+                .IsRequired();
         }
     }
 }
