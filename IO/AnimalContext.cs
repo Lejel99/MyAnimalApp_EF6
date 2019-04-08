@@ -14,6 +14,7 @@ namespace IO
         {
             Database.SetInitializer<AnimalContext>(new CreateDatabaseIfNotExists<AnimalContext>());
             Database.SetInitializer(new InitializerGender());
+            Database.SetInitializer(new InitializerSpecies());
         }
 
         public DbSet<Gender> Gender { get; set; }
@@ -23,6 +24,7 @@ namespace IO
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Configurations.Add(new EntityConfigurationGender());
+            modelBuilder.Configurations.Add(new EntityConfigurationSpecies());
         }
     }
 }

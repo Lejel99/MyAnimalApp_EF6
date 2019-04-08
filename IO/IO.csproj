@@ -50,7 +50,9 @@
   <ItemGroup>
     <Compile Include="AnimalContext.cs" />
     <Compile Include="EntityConfigurationGender.cs" />
+    <Compile Include="EntityConfigurationSpecies.cs" />
     <Compile Include="InitializerGender.cs" />
+    <Compile Include="InitializerSpecies.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

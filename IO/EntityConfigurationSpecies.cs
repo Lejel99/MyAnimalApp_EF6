@@ -8,15 +8,14 @@ using REPO;
 
 namespace IO
 {
-    class EntityConfigurationGender : EntityTypeConfiguration<Gender>
+    public class EntityConfigurationSpecies : EntityTypeConfiguration<Species>
     {
-
-        public EntityConfigurationGender()
+        public EntityConfigurationSpecies()
         {
-            this.ToTable("Genders");
+            this.ToTable("Species");
 
-            this.HasKey<int>(g => g.GenderId);
-            this.Property(g => g.GenderName)
+            this.HasKey<int>(g => g.SpeciesId);
+            this.Property(g => g.SpeciesName)
                 .HasMaxLength(30);
         }
     }
