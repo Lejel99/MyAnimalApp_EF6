@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using REPO;
 
 namespace IO
@@ -12,9 +14,7 @@ namespace IO
     {
         public AnimalContext() : base("EntityAnimalDB")
         {
-            Database.SetInitializer<AnimalContext>(new CreateDatabaseIfNotExists<AnimalContext>());
-            Database.SetInitializer(new InitializerGender());
-            Database.SetInitializer(new InitializerSpecies());
+            Database.SetInitializer(new AnimalContextSeedInitializer());
         }
 
         public DbSet<Gender> Gender { get; set; }
@@ -26,6 +26,7 @@ namespace IO
             modelBuilder.Configurations.Add(new EntityConfigurationGender());
             modelBuilder.Configurations.Add(new EntityConfigurationSpecies());
             modelBuilder.Configurations.Add(new EntityConfigurationAnimal());
+            base.OnModelCreating(modelBuilder);
         }
     }
 }

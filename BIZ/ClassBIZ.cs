@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using REPO;
 using IO;
+using System.Windows;
+using System.Data.Entity;
 
 namespace BIZ
 {
@@ -23,9 +25,11 @@ namespace BIZ
 
         public ClassBIZ()
         {
-
+            Animals = new ObservableCollection<Animal>(getData.Animal.ToList() as List<Animal>);
+            Species = new ObservableCollection<Species>(getData.Species.ToList() as List<Species>);
+            Genders = new ObservableCollection<Gender>(getData.Gender.ToList() as List<Gender>);
         }
-        
+
         public ObservableCollection<Animal> Animals
         {
             get { return animals; }
@@ -79,6 +83,24 @@ namespace BIZ
                 {
                     selectedGender = value;
                     Notify("SelectedGender");
+                }
+            }
+        }
+
+        public void MakeDataBase()
+        {
+            try
+            {
+                using (var ctx = new AnimalContext())
+                {
+                    ctx.Database.CreateIfNotExists();
+                }
+            }
+            catch (DbEntityValidationException ex)
+            {
+                foreach (var t in ex.EntityValidationErrors)
+                {
+                    MessageBox.Show(t.ValidationErrors.First().ErrorMessage);
                 }
             }
         }

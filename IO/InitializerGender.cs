@@ -21,8 +21,7 @@ namespace IO
             {
                 context.Gender.Add(gender);
             }
-
-            base.Seed(context);
+            context.SaveChanges();
         }
     }
 }

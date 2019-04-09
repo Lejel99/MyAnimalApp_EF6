@@ -26,6 +26,7 @@ namespace MyAnimalApp_EF6
         {
             InitializeComponent();
             gridMain.DataContext = CB;
+            CB.MakeDataBase();
         }
     }
 }
