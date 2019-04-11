@@ -23,7 +23,8 @@
                 <RowDefinition Height="50" />
                 <RowDefinition Height="50" />
                 <RowDefinition Height="50" />
-                <RowDefinition Height="100" />
+                <RowDefinition Height="80" />
+                <RowDefinition Height="80" />
                 <RowDefinition Height="1*" />
             </Grid.RowDefinitions>
             <Label Grid.Column="0"
@@ -54,10 +55,12 @@
                      Grid.ColumnSpan="2"
                      Height="26"
                      Margin="0,0,10,0"
-                     VerticalContentAlignment="Center"/>
+                     VerticalContentAlignment="Center"
+                     IsEnabled="False"/>
             <ComboBox x:Name="comboBoxAnimalSpecies"
                       ItemsSource="{Binding Species}"
-                      SelectedValue="{Binding SelectedAnimal.Species}"
+                      SelectedValue="{Binding SelectedAnimal.Species.SpeciesName}"
+                      SelectedItem="{Binding SelectedAnimal.Species, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                       DisplayMemberPath="SpeciesName"
                       SelectedValuePath="SpeciesName"
                       Grid.Column="1"
@@ -65,16 +68,19 @@
                       Grid.ColumnSpan="2"
                       Height="26" 
                       Margin="0,0,80,0"
-                      VerticalContentAlignment="Center"/>
+                      VerticalContentAlignment="Center"
+                      IsEnabled="False"/>
             <ComboBox x:Name="comboBoxAnimalGenders"
                       ItemsSource="{Binding Genders}"
-                      SelectedValue="{Binding SelectedAnimal.Gender}"
+                      SelectedValue="{Binding SelectedAnimal.Gender.GenderName}"
+                      SelectedItem="{Binding SelectedAnimal.Gender, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                       DisplayMemberPath="GenderName"
                       SelectedValuePath="GenderName"
                       Grid.Column="1"
                       Grid.Row="2"
                       Height="26"
-                      VerticalContentAlignment="Center" />
+                      VerticalContentAlignment="Center"
+                      IsEnabled="False"/>
             <TextBox x:Name="textBoxAnimalAge"
                      Text="{Binding SelectedAnimal.AnimalAge}"
                      Grid.Column="1"
@@ -83,38 +89,62 @@
                      Height="26"
                      Margin="0,0,200,0"
                      VerticalContentAlignment="Center"
-                     HorizontalContentAlignment="Center"/>
+                     HorizontalContentAlignment="Center"
+                     IsEnabled="False"/>
             
             <Button x:Name="buttonCreateAnimal"
                     Content="Opret"
                     Grid.Row="4"
-                    Margin="30,30,30,30"/>
+                    Margin="30,30,30,20"
+                    Tag="1"
+                    Click="ButtonCreateAnimal_Click" />
             <Button x:Name="buttonEditAnimal"
                     Content="Redigér"
                     Grid.Column="1"
                     Grid.Row="4"
-                    Margin="30,30,30,30" />
+                    Margin="30,30,30,20"
+                    Click="ButtonCreateAnimal_Click"
+                    Tag="2"/>
             <Button x:Name="buttonDeleteAnimal"
                     Content="Slet"
                     Grid.Column="2"
                     Grid.Row="4"
-                    Margin="30,30,30,30" />
+                    Margin="30,30,30,20"
+                    Click="ButtonDeleteAnimal_Click"/>
+            <Button x:Name="buttonSaveAnimal"
+                    Content="Gem"
+                    Grid.Column="0"
+                    Grid.Row="4"
+                    Margin="30,30,30,20"
+                    Visibility="Collapsed"
+                    Click="ButtonSaveAnimal_Click"/>
+            <Button x:Name="buttonDiscardChanges"
+                    Content="Afbryd"
+                    Grid.Column="1"
+                    Grid.Row="4"
+                    Margin="30,30,30,20"
+                    Visibility="Collapsed"
+                    Click="ButtonDiscardChanges_Click"/>
         </Grid>
         <ListView x:Name="listViewAnimals"
                   Margin="10"
                   ItemsSource="{Binding Animals}"
                   DisplayMemberPath="AnimalName"
-                  SelectedValue="{Binding SelectedAnimal}">
+                  SelectionChanged="ListViewAnimals_SelectionChanged">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Navn"
-                                    Width="Auto"/>
+                                    Width="Auto"
+                                    DisplayMemberBinding="{Binding AnimalName}"/>
                     <GridViewColumn Header="Art"
-                                    Width="Auto" />
+                                    Width="Auto"
+                                    DisplayMemberBinding="{Binding Species.SpeciesName}" />
                     <GridViewColumn Header="Køn"
-                                    Width="Auto" />
+                                    Width="Auto"
+                                    DisplayMemberBinding="{Binding Gender.GenderName}" />
                     <GridViewColumn Header="Alder"
-                                    Width="Auto" />
+                                    Width="Auto"
+                                    DisplayMemberBinding="{Binding AnimalAge}" />
                 </GridView>
             </ListView.View>
         </ListView>

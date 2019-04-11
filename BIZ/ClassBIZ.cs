@@ -10,6 +10,7 @@ using REPO;
 using IO;
 using System.Windows;
 using System.Data.Entity;
+using System.Windows.Input;
 
 namespace BIZ
 {
@@ -19,6 +20,10 @@ namespace BIZ
         private ObservableCollection<Animal> animals;
         private ObservableCollection<Gender> genders;
         private ObservableCollection<Species> species;
+
+        //private static bool canExecute = true;
+        //private ICommand clickCommand;
+
         private Animal selectedAnimal;
         private Species selectedSpecies;
         private Gender selectedGender;
@@ -28,6 +33,9 @@ namespace BIZ
             Animals = new ObservableCollection<Animal>(getData.Animal.ToList() as List<Animal>);
             Species = new ObservableCollection<Species>(getData.Species.ToList() as List<Species>);
             Genders = new ObservableCollection<Gender>(getData.Gender.ToList() as List<Gender>);
+            SelectedAnimal = new Animal();
+            SelectedGender = new Gender();
+            SelectedSpecies = new Species();
         }
 
         public ObservableCollection<Animal> Animals
@@ -87,11 +95,19 @@ namespace BIZ
             }
         }
 
+        //public ICommand KnapNo3
+        //{
+        //    get
+        //    {
+        //        return clickCommand ?? (clickCommand = new ClassCommand(() => Test23(), canExecute));
+        //    }
+        //}
+
         public void MakeDataBase()
         {
             try
             {
-                using (var ctx = new AnimalContext())
+                using (AnimalContext ctx = new AnimalContext())
                 {
                     ctx.Database.CreateIfNotExists();
                 }
@@ -103,6 +119,39 @@ namespace BIZ
                     MessageBox.Show(t.ValidationErrors.First().ErrorMessage);
                 }
             }
+        }
+
+        public void SaveAnimal()
+        {
+            using (AnimalContext acx = new AnimalContext())
+            {
+                acx.Gender.Attach(SelectedAnimal.Gender);
+                acx.Species.Attach(SelectedAnimal.Species);
+                acx.Animal.AddOrUpdate(SelectedAnimal);
+                acx.SaveChanges();
+                SelectedAnimal = new Animal();
+                Animals.Clear();
+                
+                List<Animal> listAnimals = acx.Animal
+                    .Include("Gender")
+                    .Include("Species")
+                    .ToList() as List<Animal>;
+                foreach (Animal animal in listAnimals)
+                {
+                    Animals.Add(animal);
+                }
+            }
+        }
+
+        public void DeleteAnimal()
+        {
+            using (AnimalContext context = new AnimalContext())
+            {
+                context.Animal.Attach(SelectedAnimal);
+                context.Animal.Remove(SelectedAnimal);
+                context.SaveChanges();
+            }
+            SelectedAnimal = new Animal();
         }
     }
 }

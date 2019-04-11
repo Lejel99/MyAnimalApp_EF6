@@ -14,7 +14,7 @@ namespace IO
         IList<Species> defaultSpecies = new List<Species>
             {
             new Species() { SpeciesName = "Skildpadde" },
-            new Species() { SpeciesName = "Hun" },
+            new Species() { SpeciesName = "Hund" },
             new Species() { SpeciesName = "Kat" },
             new Species() { SpeciesName = "Hest" },
             new Species() { SpeciesName = "Slange" },

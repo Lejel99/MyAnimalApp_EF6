@@ -14,7 +14,6 @@ namespace IO
         public EntityConfigurationGender()
         {
             this.ToTable("Genders");
-
             this.HasKey<int>(g => g.GenderId);
             this.Property(g => g.GenderName)
                 .HasMaxLength(30)

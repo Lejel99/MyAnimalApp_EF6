@@ -26,7 +26,6 @@ namespace IO
             modelBuilder.Configurations.Add(new EntityConfigurationGender());
             modelBuilder.Configurations.Add(new EntityConfigurationSpecies());
             modelBuilder.Configurations.Add(new EntityConfigurationAnimal());
-            base.OnModelCreating(modelBuilder);
         }
     }
 }

@@ -12,6 +12,8 @@ namespace REPO
         private int animalId;
         private string animalName;
         private int animalAge;
+        private Gender gender;
+        private Species species;
 
         public Animal()
         {
@@ -59,10 +61,34 @@ namespace REPO
 
         [ForeignKey("Gender")]
         public int GenderId { get; set; }
-        public Gender Gender { get; set; }
+        public Gender Gender
+        {
+            get { return gender; }
+            set
+            {
+                if (value != gender)
+                {
+                    gender = value;
+                    GenderId = gender.GenderId;
+                    Notify("Gender");
+                }
+            }
+        }
 
         [ForeignKey("Species")]
         public int SpeciesId { get; set; }
-        public Species Species { get; set; }
+        public Species Species
+        {
+            get { return species; }
+            set
+            {
+                if (value != species)
+                {
+                    species = value;
+                    SpeciesId = species.SpeciesId;
+                    Notify("Species");
+                }
+            }
+        }
     }
 }
