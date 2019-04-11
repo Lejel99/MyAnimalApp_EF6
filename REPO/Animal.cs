@@ -25,7 +25,9 @@ namespace REPO
             AnimalId = toCopy.AnimalId;
             AnimalName = toCopy.AnimalName;
             AnimalAge = toCopy.AnimalAge;
+            GenderId = toCopy.GenderId;
             Gender = toCopy.Gender;
+            SpeciesId = toCopy.SpeciesId;
             Species = toCopy.Species;
         }
         
