@@ -90,7 +90,8 @@
                      Margin="0,0,200,0"
                      VerticalContentAlignment="Center"
                      HorizontalContentAlignment="Center"
-                     IsEnabled="False"/>
+                     IsEnabled="False"
+                     PreviewTextInput="TextBoxAnimalAge_PreviewTextInput" />
             
             <Button x:Name="buttonCreateAnimal"
                     Content="Opret"
@@ -134,16 +135,16 @@
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Navn"
-                                    Width="Auto"
+                                    Width="100"
                                     DisplayMemberBinding="{Binding AnimalName}"/>
                     <GridViewColumn Header="Art"
-                                    Width="Auto"
+                                    Width="70"
                                     DisplayMemberBinding="{Binding Species.SpeciesName}" />
                     <GridViewColumn Header="Køn"
-                                    Width="Auto"
+                                    Width="60"
                                     DisplayMemberBinding="{Binding Gender.GenderName}" />
                     <GridViewColumn Header="Alder"
-                                    Width="Auto"
+                                    Width="50"
                                     DisplayMemberBinding="{Binding AnimalAge}" />
                 </GridView>
             </ListView.View>

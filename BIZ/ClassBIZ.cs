@@ -131,15 +131,8 @@ namespace BIZ
                 acx.SaveChanges();
                 SelectedAnimal = new Animal();
                 Animals.Clear();
-                
-                List<Animal> listAnimals = acx.Animal
-                    .Include("Gender")
-                    .Include("Species")
-                    .ToList() as List<Animal>;
-                foreach (Animal animal in listAnimals)
-                {
-                    Animals.Add(animal);
-                }
+
+                GetAllAnimals();
             }
         }
 
@@ -152,6 +145,23 @@ namespace BIZ
                 context.SaveChanges();
             }
             SelectedAnimal = new Animal();
+            Animals.Clear();
+            GetAllAnimals();
+        }
+
+        private void GetAllAnimals()
+        {
+            using (AnimalContext acx = new AnimalContext())
+            {
+                List<Animal> listAnimals = acx.Animal
+                    .Include("Gender")
+                    .Include("Species")
+                    .ToList() as List<Animal>;
+                foreach (Animal animal in listAnimals)
+                {
+                    Animals.Add(animal);
+                }
+            }
         }
     }
 }

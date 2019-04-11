@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace REPO
 {
-    public class Animal : ClassNotify
+    public class Animal : ClassNotify, ICloneable
     {
         private int animalId;
         private string animalName;
@@ -18,6 +18,15 @@ namespace REPO
         public Animal()
         {
             AnimalId = 0;
+        }
+
+        public Animal(Animal toCopy)
+        {
+            AnimalId = toCopy.AnimalId;
+            AnimalName = toCopy.AnimalName;
+            AnimalAge = toCopy.AnimalAge;
+            Gender = toCopy.Gender;
+            Species = toCopy.Species;
         }
         
         public int AnimalId
@@ -69,7 +78,11 @@ namespace REPO
                 if (value != gender)
                 {
                     gender = value;
-                    GenderId = gender.GenderId;
+                    if (gender != null)
+                    {
+                        GenderId = gender.GenderId;
+                    }
+                    
                     Notify("Gender");
                 }
             }
@@ -85,10 +98,19 @@ namespace REPO
                 if (value != species)
                 {
                     species = value;
-                    SpeciesId = species.SpeciesId;
+                    if (species != null)
+                    {
+                        SpeciesId = species.SpeciesId;
+                    }
+                    
                     Notify("Species");
                 }
             }
+        }
+
+        public object Clone()
+        {
+            return new Animal(this);
         }
     }
 }

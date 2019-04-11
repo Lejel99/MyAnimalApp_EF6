@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -23,6 +24,7 @@ namespace MyAnimalApp_EF6
     public partial class MainWindow : Window
     {
         ClassBIZ CB = new ClassBIZ();
+        ClassBIZ CBTemp = new ClassBIZ();
         public MainWindow()
         {
             InitializeComponent();
@@ -50,11 +52,16 @@ namespace MyAnimalApp_EF6
             comboBoxAnimalGenders.IsEnabled = true;
             textBoxAnimalAge.IsEnabled = true;
             listViewAnimals.IsEnabled = false;
+
+            CopyAnimal(CBTemp, CB);
+            gridInfo.DataContext = CBTemp;
         }
 
         private void ButtonSaveAnimal_Click(object sender, RoutedEventArgs e)
         {
+            CopyAnimal(CB, CBTemp);
             CB.SaveAnimal();
+            gridInfo.DataContext = CB;
 
             buttonCreateAnimal.Visibility = Visibility.Visible;
             buttonEditAnimal.Visibility = Visibility.Visible;
@@ -82,7 +89,7 @@ namespace MyAnimalApp_EF6
 
         private void ButtonDiscardChanges_Click(object sender, RoutedEventArgs e)
         {
-            CB.SelectedAnimal = new Animal();
+            gridInfo.DataContext = CB;
 
             buttonCreateAnimal.Visibility = Visibility.Visible;
             buttonEditAnimal.Visibility = Visibility.Visible;
@@ -115,6 +122,17 @@ namespace MyAnimalApp_EF6
                 CB.SelectedAnimal = null;
                 CB.SelectedAnimal = (Animal)lv.SelectedItem;
             }
+        }
+
+        private void CopyAnimal(ClassBIZ toBIZ, ClassBIZ fromBIZ)
+        {
+            toBIZ.SelectedAnimal = (Animal)fromBIZ.SelectedAnimal.Clone();
+        }
+
+        private void TextBoxAnimalAge_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
         }
     }
 }
