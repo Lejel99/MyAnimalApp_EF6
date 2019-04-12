@@ -159,18 +159,17 @@ namespace BIZ
 
         private void GetAllAnimals()
         {
-            //using (AnimalContext acx = new AnimalContext())
-            //{
-            //    List<Animal> listAnimals = acx.Animal
-            //        .Include("Gender")
-            //        .Include("Species")
-            //        .ToList() as List<Animal>;
-            //    foreach (Animal animal in listAnimals)
-            //    {
-            //        Animals.Add(animal);
-            //    }
-            //}
-            Animals = new ObservableCollection<Animal>(getData.Animal.ToList() as List<Animal>);
+            using (AnimalContext acx = new AnimalContext())
+            {
+                List<Animal> listAnimals = acx.Animal
+                    .Include("Gender")
+                    .Include("Species")
+                    .ToList() as List<Animal>;
+                foreach (Animal animal in listAnimals)
+                {
+                    Animals.Add(animal);
+                }
+            }
         }
     }
 }
